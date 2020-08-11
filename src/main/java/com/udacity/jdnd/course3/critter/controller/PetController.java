@@ -19,6 +19,7 @@ public class PetController {
     @Autowired
     private PetService petService;
 
+    // returns pet object with ownerId(-1) if successful
     @PostMapping
     public PetDTO savePet(@RequestBody PetDTO petDTO) {
         Pet pet = convertPetDTOToEntity(petDTO);
@@ -51,6 +52,11 @@ public class PetController {
 
     // converts a Pet entity to a Pet DTO
     private PetDTO convertPetEntityToDTO(Pet pet) {
+        if (pet.getOwner() == null) {
+            return new PetDTO(pet.getId(), pet.getType(), pet.getName(), -1,
+                    pet.getBirthDate(), pet.getNotes());
+        }
+
         return new PetDTO(pet.getId(), pet.getType(), pet.getName(), pet.getOwner().getId(),
                 pet.getBirthDate(), pet.getNotes());
     }
