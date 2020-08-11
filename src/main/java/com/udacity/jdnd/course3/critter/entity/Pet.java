@@ -14,7 +14,6 @@ public class Pet {
 
     private PetType type;
     private String name;
-    private Long ownerId;
     private LocalDate birthDate;
     private String notes;
 
@@ -24,7 +23,14 @@ public class Pet {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
-    private Customer customer;
+    private Customer owner;
+
+    public Pet(PetType type, String name, LocalDate birthDate, String notes) {
+        this.type = type;
+        this.name = name;
+        this.birthDate = birthDate;
+        this.notes = notes;
+    }
 
     public Long getId() {
         return id;
@@ -48,14 +54,6 @@ public class Pet {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Long getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(Long ownerId) {
-        this.ownerId = ownerId;
     }
 
     public LocalDate getBirthDate() {
@@ -82,11 +80,11 @@ public class Pet {
         this.schedule = schedule;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Customer getOwner() {
+        return owner;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setOwner(Customer owner) {
+        this.owner = owner;
     }
 }
