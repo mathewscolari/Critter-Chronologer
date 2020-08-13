@@ -12,8 +12,18 @@ import java.util.Set;
 public class EmployeeDTO {
     private long id;
     private String name;
-    private Set<EmployeeSkill> skills;
     private Set<DayOfWeek> daysAvailable;
+    private Set<EmployeeSkill> skills;
+
+    public EmployeeDTO() {
+    }
+
+    public EmployeeDTO(long id, String name, Set<DayOfWeek> daysAvailable, Set<EmployeeSkill> skills) {
+        this.id = id;
+        this.name = name;
+        this.daysAvailable = daysAvailable;
+        this.skills = skills;
+    }
 
     public long getId() {
         return id;

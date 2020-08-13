@@ -19,9 +19,10 @@ public class PetService {
     private PetRepository petRepository;
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private CustomerService customerService;
 
-    public Pet save(Pet pet) {
+    public Pet save(Pet pet, Long ownerId) {
+        customerService.addPetToOwner(pet, ownerId);
         return petRepository.save(pet);
     }
 
@@ -35,9 +36,8 @@ public class PetService {
     }
 
     public List<Pet> findPetsByOwner(Long ownerId) {
-        Optional<Customer> optionalCustomer = customerRepository.findById(ownerId);
-        Customer customer = optionalCustomer.orElseThrow(EntityNotFoundException::new);
-        return customer.getPets();
+        Customer owner = customerService.findCustomer(ownerId);
+        return owner.getPets();
     }
 
 }

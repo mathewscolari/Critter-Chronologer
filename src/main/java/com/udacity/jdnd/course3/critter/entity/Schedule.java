@@ -19,6 +19,15 @@ public class Schedule {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "schedule", cascade = CascadeType.ALL)
     private List<Pet> pets;
 
+    public Schedule() {
+    }
+
+    public Schedule(LocalDate date, List<Employee> employees, List<Pet> pets) {
+        this.date = date;
+        this.employees = employees;
+        this.pets = pets;
+    }
+
     public Long getId() {
         return id;
     }
